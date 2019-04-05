@@ -15,6 +15,13 @@ $ composer require rockbuzz/lara-client
 ```
 
 ## Configuration
+```bash
+$ php artisan vendor:publish --provider="Rockbuzz\LaraClient\ServiceProvider"
+```
+```bash
+$ php artisan migrate
+```
+
 ### In App\Http\Kernel.php
 ```php
 protected $middlewareGroups = [
