@@ -23,8 +23,6 @@ class TokenTest extends TestCase
     {
         $string = Token::secretKey();
 
-        dd($string);
-
         $this->assertEquals(64, strlen($string));
     }
 }
