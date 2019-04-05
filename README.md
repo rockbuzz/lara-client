@@ -2,7 +2,7 @@
 
 Identifying client applications
 
-travis markdown
+[![Build Status](https://travis-ci.org/rockbuzz/lara-client.svg?branch=master)](https://travis-ci.org/rockbuzz/lara-client)
 
 ## Requirements
 
