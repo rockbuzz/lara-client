@@ -33,21 +33,20 @@ protected $middlewareGroups = [
     ],
 ];
 ```
-### Access Example
+### Add client
 ```php
-$client = new Guzzle\Http\Client();
-$client->request('GET', 'endpoint', [
-    'headers' => [
-        'X-API-KEY' => env('PUBLIC_KEY'),
-        'X-API-TOKEN' => hash_hmac('sha256', env('PUBLIC_KEY'), env('SECRET_KEY')),
-     ]
-]);
+$ php artisan client:create clientName
 ```
 
-### Optional
+### Access Example
 ```php
-$publicKey = \Rockbuzz\LaraClient\StrGenerate::publicKey();
-$secretKey = \Rockbuzz\LaraClient\StrGenerate::secretKey();
+$httpClient = new Guzzle\Http\Client();
+$httpClient->request('GET', 'https://endpoint.com/api/resource', [
+    'headers' => [
+        'X-API-KEY' => $client->publicKey,
+        'X-API-TOKEN' => hash_hmac('sha256', $client->publicKey, $client->secretKey),
+     ]
+]);
 ```
 
 ## License

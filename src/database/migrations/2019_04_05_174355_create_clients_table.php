@@ -21,7 +21,7 @@ class CreateClientsTable extends Migration
             $table->string('cnpj')->nullable();
             $table->string('public_key')->unique();
             $table->string('secret_key')->unique();
-            $table->timestamp('start_access')->default(now());
+            $table->timestamp('start_access')->useCurrent();
             $table->timestamp('end_access')->nullable();
             $table->integer('limit_access')->nullable();
             $table->boolean('active')->default(true);
@@ -34,7 +34,7 @@ class CreateClientsTable extends Migration
             $table->string('host');
             $table->unsignedInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
-            $table->timestamp('created_at')->default(now());
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

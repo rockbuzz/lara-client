@@ -3,6 +3,7 @@
 namespace Rockbuzz\LaraClient;
 
 use Illuminate\Support\ServiceProvider as SupportServiceProvider;
+use Rockbuzz\LaraClient\Commands\CreateClient;
 
 class ServiceProvider extends SupportServiceProvider
 {
@@ -22,5 +23,9 @@ class ServiceProvider extends SupportServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/config/client.php', 'client');
+
+        $this->commands([
+            CreateClient::class
+        ]);
     }
 }
