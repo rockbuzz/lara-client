@@ -2,16 +2,16 @@
 
 namespace Tests;
 
-use Rockbuzz\LaraClient\Token;
+use Rockbuzz\LaraClient\StrGenerate;
 
-class TokenTest extends TestCase
+class StrGenerateTest extends TestCase
 {
     /**
      * @test
      */
     public function itShouldStringWith32Characters()
     {
-        $string = Token::publicKey();
+        $string = StrGenerate::publicKey();
 
         $this->assertEquals(32, strlen($string));
     }
@@ -21,7 +21,7 @@ class TokenTest extends TestCase
      */
     public function itShouldStringWith64Characters()
     {
-        $string = Token::secretKey();
+        $string = StrGenerate::secretKey();
 
         $this->assertEquals(64, strlen($string));
     }

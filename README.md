@@ -22,6 +22,7 @@ $ php artisan vendor:publish --provider="Rockbuzz\LaraClient\ServiceProvider"
 $ php artisan migrate
 ```
 
+## Usage
 ### In App\Http\Kernel.php
 ```php
 protected $middlewareGroups = [
@@ -32,7 +33,7 @@ protected $middlewareGroups = [
     ],
 ];
 ```
-### Example
+### Access Example
 ```php
 $client = new Guzzle\Http\Client();
 $client->request('GET', 'endpoint', [
@@ -41,7 +42,12 @@ $client->request('GET', 'endpoint', [
         'X-API-TOKEN' => hash_hmac('sha256', env('PUBLIC_KEY'), env('SECRET_KEY')),
      ]
 ]);
+```
 
+### Optional
+```php
+$publicKey = \Rockbuzz\LaraClient\StrGenerate::publicKey();
+$secretKey = \Rockbuzz\LaraClient\StrGenerate::secretKey();
 ```
 
 ## License

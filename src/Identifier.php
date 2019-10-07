@@ -20,7 +20,7 @@ class Identifier
         if (! $client = Client::where('public_key', $publicKey)->first()) {
             return $this->responseUnauthorized();
         }
-        if ($apiToken !== hash_hmac('sha256', $publicKey, $client->secret_key)) {
+        if ($apiToken !== $client->token) {
             return $this->responseUnauthorized();
         }
 
@@ -28,12 +28,13 @@ class Identifier
             return $this->responseUnauthorized();
         }
 
-        $client->accesses()->create([
-            'ip' => $this->getClientIp($request),
-            'host' => $request->getHost(),
-        ]);
+        $client->registerAnAccess(
+            $this->getClientIp($request),
+            $request->getHost()
+        );
 
         return $next($request);
+        
     }
 
     private function getClientIp($request)

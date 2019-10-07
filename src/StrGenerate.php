@@ -2,7 +2,7 @@
 
 namespace Rockbuzz\LaraClient;
 
-final class Token
+final class StrGenerate
 {
     public static function publicKey(): string
     {

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Rockbuzz\LaraClient\Identifier;
 use Rockbuzz\LaraClient\Models\Client;
-use Rockbuzz\LaraClient\Token;
+use Rockbuzz\LaraClient\StrGenerate;
 
 class IdentifierTest extends TestCase
 {
@@ -31,7 +31,7 @@ class IdentifierTest extends TestCase
     {
         $request = new Request();
         $request->headers->add([
-            'X-API-KEY' => Token::publicKey(),
+            'X-API-KEY' => StrGenerate::publicKey(),
             'X-API-TOKEN: ' => 'token'
         ]);
 
@@ -47,8 +47,8 @@ class IdentifierTest extends TestCase
      */
     public function itShouldNull()
     {
-        $publicKey = Token::publicKey();
-        $secretKey = Token::secretKey();
+        $publicKey = StrGenerate::publicKey();
+        $secretKey = StrGenerate::secretKey();
         $client = Client::create([
             'name' => 'Client Name',
             'public_key' => $publicKey,

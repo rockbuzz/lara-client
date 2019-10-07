@@ -8,13 +8,32 @@ use Rockbuzz\LaraClient\Token;
 
 class Client extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'cnpj',
+        'public_key',
+        'secret_key',
+        'start_access',
+        'end_access',
+        'limit_access',
+        'active'
+    ];
 
     protected $dates = ['start_access', 'end_access'];
 
     public function accesses(): HasMany
     {
         return $this->hasMany(ClientAccess::class);
+    }
+
+    public function registerAnAccess(string $ip, string $host)
+    {
+        $this->accesses()->create([
+            'ip' => $ip,
+            'host' => $host
+        ]);
     }
 
     public function canAccess(): bool

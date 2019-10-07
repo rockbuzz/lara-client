@@ -17,6 +17,29 @@ class ClientTest extends TestCase
     /**
      * @test
      */
+    public function mustHaveTheFields()
+    {
+        $client = factory(Client::class)->create();
+
+        $fillable = [
+            'name',
+            'email',
+            'phone',
+            'cnpj',
+            'public_key',
+            'secret_key',
+            'start_access',
+            'end_access',
+            'limit_access',
+            'active'
+        ];
+
+        $this->assertEquals($fillable, $client->getFillable());
+    }
+
+    /**
+     * @test
+     */
     public function itClientHasDatesCarbon()
     {
         $client = factory(Client::class)->create();
@@ -83,5 +106,21 @@ class ClientTest extends TestCase
             'client_id' => $client->id
         ]);
         $this->assertFalse($client->canAccess());
+    }
+
+    /**
+     * @test
+     */
+    public function mustRegisterAnAccess()
+    {
+        $client = factory(Client::class)->create();
+
+        $client->registerAnAccess('127.0.0.2', 'domain.com');
+
+        $this->assertDatabaseHas('client_access', [
+            'ip' => '127.0.0.2',
+            'host' => 'domain.com',
+            'client_id' => $client->id
+        ]);
     }
 }
