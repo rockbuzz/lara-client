@@ -4,6 +4,7 @@ namespace Rockbuzz\LaraClient\Commands;
 
 use Illuminate\Console\Command;
 use Rockbuzz\LaraClient\Models\Client;
+use Rockbuzz\LaraClient\StrGenerate;
 
 class CreateClient extends Command
 {
@@ -36,7 +37,9 @@ class CreateClient extends Command
         try {
             $name = $this->argument('name');
             $client = Client::create([
-                'name' => $name
+                'name' => $name,
+                'public_key' => StrGenerate::publicKey(),
+                'secret_key' => StrGenerate::secretKey()
             ]);
 
             $headers = [
